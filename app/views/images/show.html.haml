@@ -1,0 +1,19 @@
+%nav.navi
+  .hat
+    %a{:href => "/"}
+      .jd-logo justdraw.in
+
+    %a{:href => "/images/new?p=#{@comments[0].id}"}
+      .draw-wrap
+        %button{:type => "button", :name => "", :value => "", :class => "draw"} New post
+
+.content
+  - @row = 0
+  - @comments.each do |com|
+    - @row = @row + 1
+    .comment-entity
+      .comment-top-wrap
+        #{@row}: <a href="/img/#{com.fname}"><img class="comment-img" width="600" src="/img/#{com.fname}" /></a>
+      .comment-bottom-wrap
+        %span.comment-date (#{com.created_at.to_s})
+        %span by <a class="author" href="../?u=#{com.author}">#{com.author}</a>

@@ -1,0 +1,9 @@
+%nav.navi
+  .hat
+    %a{:href => "/"}
+      .jd-logo justdraw.in
+
+.content
+  %object{:width => "800", :height => "950"}
+    %param{:name => "draw", :value => "drawr0.swf"}
+    %embed{:src => "drawr0.swf", :width => "800", :height => "950", :FlashVars => "uname=#{@coo[:jdl]}&root=#{@coo[:parent]}"}

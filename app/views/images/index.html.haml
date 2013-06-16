@@ -1,0 +1,42 @@
+%nav.navi
+  .hat
+    %a{:href => "/"}
+      .jd-logo justdraw.in
+
+    
+    %a{:href => "/images/new"}
+      .draw-wrap
+        %button{:type => "button", :name => "", :value => "", :class => "draw"} New post
+
+.content
+  .row
+    - for i in params[:p].to_i*16 + 1..params[:p].to_i*16 + 16 do img = @images[-i]
+      - if img.nil?
+        .entity
+      - else
+        .entity
+          - if img.parent == "user"
+            %a{:href => "/images/#{img.id}"}
+              .entity-img{:style => "background-image:url(/img/#{img.fname})"}
+          - else
+            %a{:href => "/images/#{img.parent}"}
+              .entity-img{:style => "background-image:url(/img/#{img.fname})"}
+
+          .entity-author
+            %span by <a class="author" href="./?u=#{img.author}">#{img.author}</a>
+
+  %br
+
+  - if params[:p].to_i == 0
+    %a{:href => '#'}
+      %button.unnav{:type => "button", :name => '', :value => '', :disabled => "disabled"}Prev
+  - elsif params[:p].to_i > 0
+    %a{:href => "./?p=#{params[:p].to_i - 1}"}
+      %button.nav{:type => "button", :name => "", :value => ""}Prev
+
+  - if @images.count - 16 > (params[:p].to_i) * 16
+    %a{:href => "./?p=#{params[:p].to_i + 1}"}
+      %button.nav{:type => "button", :name => "", :value => ""}Next
+  - else
+    %a{:href => '#'}
+      %button.unnav{:type => "button", :name => '', :value => '', :disabled => "disabled"}Next

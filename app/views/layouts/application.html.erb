@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>justdraw.in - online drawing community</title>
+  <meta name="description" content="justdraw.in is a growing online drawing community that provides you with its own awesome online drawing tool. You can doodle a new post and comment on drawings of others without a registration.">
+  
+  <link href="http://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet" type="text/css">
+  <%= stylesheet_link_tag 'style' %>
+  <link href="favicon.ico" rel="shortcut icon" type="image/x-icon" />
+  
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body style="background:#fbfbfb">
+  <!--nav class="navi">
+    <div class="hat">
+      <a href="/">
+        <div class="jd-logo">justdraw.in</div>
+      </a>
+
+      <a href="/images/new">
+        <div class="draw-wrap">
+          <button type="button" name="" value="" class="draw">New post</button>
+        </div>
+      </a>
+    </div>
+  </nav-->
+  
+<%= yield %>
+
+<p class="notice"><%= notice %></p>
+<p class="alert"><%= alert %></p>
+
+</body>
+</html>
