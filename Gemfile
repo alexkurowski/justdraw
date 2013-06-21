@@ -21,7 +21,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-# gem 'therubyracer', platforms: :ruby
+# gem 'therubyracer', platforms: :rubyins
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -50,3 +50,7 @@ end
 # gem 'debugger', group: [:development, :test]
 
 gem 'haml-rails'
+gem 'curb'
+gem 'crack'
+
+#gem 'imgur', :require => 'imgur', :git => "https://github.com/mapimopi/imgur.git", :platform => :ruby

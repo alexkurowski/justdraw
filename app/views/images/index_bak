@@ -17,10 +17,10 @@
         .entity
           - if img.parent == "user"
             %a{:href => "/images/#{img.id}"}
-              .entity-img{:style => "background-image:url(#{img.fname})"}
+              .entity-img{:style => "background-image:url(/img/#{img.fname})"}
           - else
             %a{:href => "/images/#{img.parent}"}
-              .entity-img{:style => "background-image:url(#{img.fname})"}
+              .entity-img{:style => "background-image:url(/img/#{img.fname})"}
 
           .entity-author
             %span by <a class="author" href="./?u=#{img.author}">#{img.author}</a>

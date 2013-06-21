@@ -1,15 +1,15 @@
+require "#{Rails.root}/lib/tasks/imgur.rb"
+
 class ImagesController < ApplicationController
   before_action :set_image, only: [:show, :edit, :update, :destroy]
 
-  # GET /images
-  # GET /images.json
+  # GET / /images
   def index
     @images = Image.all
     params[:p] = '0' unless params.has_key?(:p)
   end
 
   # GET /images/1
-  # GET /images/1.json
   def show
     @comments = Image.where("id = #{params[:id]} OR parent = #{params[:id]}")
   end
@@ -23,24 +23,23 @@ class ImagesController < ApplicationController
     @image = Image.new
   end
 
-  # GET /images/1/edit
-  def edit
-  end
-
   # POST /images
-  # POST /images.json
   def create
+    @imgur = Imgur::API.new '2c7a02d71633c71'
+    
     @img = Image.new;
     name = Digest::SHA1.hexdigest(Time.now.to_s)
-    @img.fname = "#{name}.png"
+    #@img.fname = "#{name}.png"
     @img.author = params[:author_]
     @img.parent = params[:parent_]
     @img.public = params[:public]
 
-    File.open("#{Rails.root}/public/img/#{name}.png", 'wb') do |f|
+    File.open("#{Rails.root}/tmp/#{name}.png", 'wb') do |f|
       f.write(Base64.decode64(params[:data]))
       f.close
     end
+    
+    @img.fname = (@imgur.upload_file "#{Rails.root}/tmp/#{name}.png")["link"]
     
     respond_to do |format|
       if @img.save
@@ -54,7 +53,6 @@ class ImagesController < ApplicationController
   end
 
   # PATCH/PUT /images/1
-  # PATCH/PUT /images/1.json
   def update
     respond_to do |format|
       if @image.update(image_params)
@@ -68,7 +66,6 @@ class ImagesController < ApplicationController
   end
 
   # DELETE /images/1
-  # DELETE /images/1.json
   def destroy
     @image.destroy
     respond_to do |format|
