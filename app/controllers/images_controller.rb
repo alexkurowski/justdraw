@@ -26,21 +26,21 @@ class ImagesController < ApplicationController
   # POST /images
   def create
     @imgur = Imgur::API.new '2c7a02d71633c71'
-    
+      Rails.logger.info "-> BEFORE NEW IMAGE"
     @img = Image.new
-    name = "#{Digest::SHA1.hexdigest(Time.now.to_s)}_#{Process.pid}"
+    #name = "#{Digest::SHA1.hexdigest(Time.now.to_s)}_#{Process.pid}"
     #@img.fname = "#{name}.png"
     @img.author = params[:author_]
     @img.parent = params[:parent_]
     @img.public = params[:public]
-
+      Rails.logger.info "-> AFTER NEW IMAGE"
     #File.open("#{Rails.root}/tmp/#{name}", 'wb') do |f|
       #f.write(Base64.decode64(params[:data]))
     #end
-    
+      Rails.logger.info "-> BEFORE UPLOAD"
     #@img.fname = (@imgur.upload_file "#{Rails.root}/tmp/#{name}")["link"]
     @img.fname = (@imgur.upload_from_bytes params[:data])["link"]
-    
+      Rails.logger.info "-> AFTER UPLOAD"
     respond_to do |format|
       if @img.save
         format.html { redirect_to "/", notice: 'Image was successfully created.' }
