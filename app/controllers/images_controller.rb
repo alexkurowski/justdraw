@@ -2,7 +2,7 @@ require "#{Rails.root}/lib/tasks/imgur.rb"
 
 class ImagesController < ApplicationController
   before_action :set_image, only: [:show, :edit, :update, :destroy]
-  #skip_before_filter :verify_authenticity_token
+  skip_before_filter :verify_authenticity_token
   protect_from_forgery :except => :create
   
   # GET / /images
