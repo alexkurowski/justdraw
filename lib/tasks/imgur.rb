@@ -42,6 +42,21 @@ module Imgur
 			response["data"]
 		end
 		
+		# Uploads an image from byte stream
+    #
+    # @param [String] image_filename The filename of the image on disk to upload
+    # @raise [ImgurError]
+    # @return [Hash] Image data
+    def upload_from_bytes image_bytes
+      c = Curl::Easy.new("https://api.imgur.com/3/upload.json")
+      c.multipart_form_post = true
+      c.headers['Authorization'] = "Client-ID #{@api_key}"
+      c.http_post(Curl::PostField.content('image', image_bytes))
+      response = Crack::JSON.parse c.body_str
+      #raise ImgurError, response["error_msg"] if response["rsp"]["stat"] == "fail"
+      response["data"]
+    end
+		
 		# Uploads a file from a remote URL
 		#
 		# @param [String] image_url The URL of the image to upload
@@ -55,4 +70,5 @@ module Imgur
 			#raise ImgurError, response["rsp"]["error_msg"] if response["rsp"]["stat"] == "fail"
 			response["data"]
 		end
+	end
 end

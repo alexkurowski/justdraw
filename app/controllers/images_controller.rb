@@ -34,12 +34,12 @@ class ImagesController < ApplicationController
     @img.parent = params[:parent_]
     @img.public = params[:public]
 
-    File.open("#{Rails.root}/tmp/#{name}", 'wb') do |f|
-      f.write(Base64.decode64(params[:data]))
-      f.close
-    end
+    #File.open("#{Rails.root}/tmp/#{name}", 'wb') do |f|
+      #f.write(Base64.decode64(params[:data]))
+    #end
     
-    @img.fname = (@imgur.upload_file "#{Rails.root}/tmp/#{name}")["link"]
+    #@img.fname = (@imgur.upload_file "#{Rails.root}/tmp/#{name}")["link"]
+    @img.fname = (@imgur.upload_from_bytes params[:data])["link"]
     
     respond_to do |format|
       if @img.save
