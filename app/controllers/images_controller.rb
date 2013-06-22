@@ -27,19 +27,19 @@ class ImagesController < ApplicationController
   def create
     @imgur = Imgur::API.new '2c7a02d71633c71'
     
-    @img = Image.new;
-    name = Digest::SHA1.hexdigest(Time.now.to_s)
+    @img = Image.new
+    name = "#{Digest::SHA1.hexdigest(Time.now.to_s)}_#{Process.pid}"
     #@img.fname = "#{name}.png"
     @img.author = params[:author_]
     @img.parent = params[:parent_]
     @img.public = params[:public]
 
-    File.open("#{Rails.root}/tmp/#{name}.png", 'wb') do |f|
+    File.open("#{Rails.root}/tmp/#{name}", 'wb') do |f|
       f.write(Base64.decode64(params[:data]))
       f.close
     end
     
-    @img.fname = (@imgur.upload_file "#{Rails.root}/tmp/#{name}.png")["link"]
+    @img.fname = (@imgur.upload_file "#{Rails.root}/tmp/#{name}")["link"]
     
     respond_to do |format|
       if @img.save
