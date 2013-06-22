@@ -78,5 +78,5 @@ Justdraw::Application.configure do
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
 
-  # config.action_controller.allow_forgery_protection = false
+  config.action_controller.allow_forgery_protection = false
 end
