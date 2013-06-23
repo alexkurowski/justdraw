@@ -1,7 +1,9 @@
 == README
 
+http://justdraw.herokuapp.com
+
 Justdraw is an open source drawing community web site.
 
-This app is still in development and bugfix process.
+Go to the link above and draw something, it's easy and don't require any kind of registration. Just draw!
 
-Please, visit justdraw.herokuapp.com for results.
+Please, contact me if you have any kind of suggestions @ mapimopipi@gmail.com
