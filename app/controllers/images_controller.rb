@@ -13,7 +13,7 @@ class ImagesController < ApplicationController
 
   # GET /images/1
   def show
-    @comments = Image.where("id = #{params[:id]} OR parent = '#{params[:id]}'")
+    @comments = Image.where("id=#{params[:id]} OR parent='#{params[:id].to_s}'")
   end
 
   # GET /images/new
